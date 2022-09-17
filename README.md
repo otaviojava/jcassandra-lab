@@ -17,3 +17,4 @@ In this book, Otávio Santana discusses Cassandra, its concepts, and its applica
 * [Lab 1](01-instalation.md)
 * [Lab 2](02-cql.md)
 * [Lab 3](03-cql-part-II.md)
+* [Lab 4](04-try.md)
