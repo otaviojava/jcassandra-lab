@@ -69,3 +69,62 @@ By default in Docker, all files are created inside the container. Thus, to extra
 docker run --name some-cassandra -p 9042: 9042 -v /my/own/datadir:/var/lib/cassandra -d cassandra
 ```
 
+## Creating the first cluster with Docker Compose
+
+Following the line of the Docker and container, to execute a cluster, it is necessary to have many containers. One of the tools that allow the execution of multiple containers is Docker Compose.
+
+Compose is a tool to run multiple containers, which is done in a very simple way with a YAML configuration file. Thus, with a single command, it is possible to run many containers. The following file shows a simple configuration using three nodes in the cluster.
+
+The entire description of containers, configuration of each, and how they interrelate is made from a file of extension YML, which by convention has the name `docker-compose.yml`. This file contains the configuration of three Cassandra nodes from Docker images 
+
+> Make sure you replace the volume directory with your own.
+
+```yaml
+version: '3.2'
+
+services:
+
+    db-01:
+        image: "cassandra"
+        networks:
+          - cassandranet
+        environment:
+          broadcast_address: db-01
+          seeds: db-01, db-02, db-03
+          JVM_OPTS: -Xms1G -Xmx1G
+        volumes:
+          - /home/otaviojava/Environment/nosql/db1:/var/lib/cassandra
+    
+    db-02:
+        image: "cassandra"
+        networks:
+          - cassandranet
+        environment:
+          broadcast_address: db-02
+          seeds: db-01, db-02, db-03
+          JVM_OPTS: -Xms1G -Xmx1G
+        volumes:
+          - /home/otaviojava/Environment/nosql/db2:/var/lib/cassandra
+    
+    db-03:
+        image: "cassandra"
+        networks:
+          - cassandranet
+        environment:
+          broadcast_address: db-03
+          seeds: db-01, db-02, db-03
+          JVM_OPTS: -Xms1G -Xmx1G
+        volumes:
+          - /home/otaviojava/Environment/nosql/db3:/var/lib/cassandra
+
+networks:
+    cassandranet:
+```
+
+
+With the `docker-compose.yml` file created, the next steps are very simple:
+
+1. To start the containers: `docker-compose -f docker-compose.yml up -d`
+2. To stop and remove the containers: `docker-compose -f docker-compose.yml down`
+
+
