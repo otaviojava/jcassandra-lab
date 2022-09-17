@@ -11,3 +11,9 @@ In this book, Otávio Santana discusses Cassandra, its concepts, and its applica
 * Docker: https://docs.docker.com/engine/install/centos/
 * Docker Compose: https://docs.docker.com/compose/install/
 * Java Version 11 or 17
+
+## LABs
+
+* [Lab 1](01-instalation.md)
+* [Lab 2](02-cql.md)
+* [Lab 3](03-cql-part-II.md)
