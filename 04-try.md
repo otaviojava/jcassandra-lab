@@ -7,6 +7,7 @@ Model an agenda:
 
 * Where we have a name, birthday, and details.
 
+E.g.: 
 
 ```java
 public class Contact {
@@ -21,21 +22,27 @@ public class Contact {
 ## Car/Driver registration
 
 
+* Where we have a Car registration.
+
+E.g.: 
+
 
 ```java
-@Entity
+
 class Car {
-    @Id
+
     private String plate;
 
-    @Column
     private String city;
 
-    @Column
     private String color;
-
-    @UDT("owner")
-    @Column
+    //UDT
     private Owner owner;
+}
+
+class Owner {
+
+    private String name;
+    private String number;
 }
 ```
